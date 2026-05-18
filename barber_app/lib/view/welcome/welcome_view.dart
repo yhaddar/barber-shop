@@ -62,7 +62,7 @@ class WelcomeView extends StatelessWidget {
                 SizedBox(
                   width: MediaQuery.of(context).size.width,
                   height: 50,
-                  child: Buttons.btnPrimary(Texts.nextBtn, () => OnboardingViewModel.nextPage(context, Routes.onboarding)),
+                  child: Buttons.btnPrimary(Texts.nextBtn, () => OnboardingViewModel.nextPage(Routes.onboarding)),
                 ),
                 SizedBox(height: 20,),
               ],

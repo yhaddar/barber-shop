@@ -7,17 +7,17 @@ class OnboardingViewModel extends GetxController {
   PageController pageController = PageController();
   RxInt index = 0.obs;
 
-  static void nextPage(context, route){
-    Routes.pushToNextPage(context, route);
+  static void nextPage(String route){
+    Routes.pushToNextPage(route);
   }
 
   void changeIndex(i){
     index.value = i;
   }
 
-  void nextOnloading(context){
+  void nextOnloading(){
     if(index.value == 2){
-      Routes.pushToNextPage(context, Routes.login);
+      Routes.pushNamed(Routes.auth);
     }
     print(index.value);
   }

@@ -29,8 +29,8 @@ class _OnboardingViewState extends State<OnboardingView> {
           crossAxisAlignment: CrossAxisAlignment.start,
           spacing: 5,
           children: [
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.87,
+            Container(
+              height: MediaQuery.of(context).size.height * 0.8,
               child: PageView(
                 controller: onboardingViewModel.pageController,
                 onPageChanged: (i) => onboardingViewModel.changeIndex(i),
@@ -50,7 +50,6 @@ class _OnboardingViewState extends State<OnboardingView> {
                       SizedBox(height: 8,),
                       Container(
                         margin: EdgeInsets.symmetric(horizontal: 10),
-                        height: MediaQuery.of(context).size.height * 0.26,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -97,7 +96,7 @@ class _OnboardingViewState extends State<OnboardingView> {
                        height: 50,
                        child: Buttons.btnPrimary(
                          Texts.getStarted,
-                             () => onboardingViewModel.nextOnloading(context),
+                             () => onboardingViewModel.nextOnloading(),
                        ),
                      );
                    }else {

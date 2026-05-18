@@ -5,4 +5,7 @@ class Texts {
   static String nextBtn = "next";
   static String getStarted = "get started";
   static List<String> onboardingText = ["Find Barbers and Salons Easily in Your Hands", "Book your Favorite Barber and Salon Quickly", "Come be handsome and beautiful with us right now!"];
+  static String signInWithPassword = "Sign in with password";
+  static String dontHaveAnAccount = "don't have an account ? ";
+  static String signUp = "Sign up";
 }
