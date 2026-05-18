@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-class Onboarding extends StatelessWidget {
-  const Onboarding({super.key});
+class LoginView extends StatelessWidget {
+  const LoginView({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(child: Text("hello world")),
+      body: SafeArea(child: Text("login page")),
     );
   }
 }

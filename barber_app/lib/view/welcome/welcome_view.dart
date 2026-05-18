@@ -8,8 +8,8 @@ import '../../utils/colors.dart';
 import '../../utils/images.dart';
 import '../../utils/routes.dart';
 
-class Welcome extends StatelessWidget {
-  const Welcome({super.key});
+class WelcomeView extends StatelessWidget {
+  const WelcomeView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class Welcome extends StatelessWidget {
             height: MediaQuery.of(context).size.height,
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage(Images.onboarding1),
+                image: AssetImage(Images.welcomeImage),
                 fit: BoxFit.cover,
               ),
             ),
