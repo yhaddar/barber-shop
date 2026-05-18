@@ -1,3 +1,8 @@
 flutter_native_splash:
   color: "#FF6B35"
-  image: ""
+  image: "assets/images/splash/barber.png"
+  android: true
+  ios: true
+  fullscreen: true
+  android_gravity: center
+  ios_content_mode: center
