@@ -74,11 +74,13 @@ class UserController extends Controller
         if($user->save()){
             $this->otpCodeResend("your berber shop verification code is : ", $user);
             return response()->json([
+                "success" => true,
                 "message" => "account created"
             ])->cookie('user_id', $user['id']);
         }else {
             return response()->json([
-               "message" => "Failed to create your account"
+                "success" => false,
+                "message" => "Failed to create your account"
             ]);
         }
     }

@@ -20,5 +20,8 @@ class Texts {
   static String firstNameHint = "First Name";
   static String lastNameHint = "Last Name";
   static String continueText = "continue";
+  static String msgErrorDateBirth = "you must be great than 18";
+  static String msgErrorPhone = "select number phone";
+  static String msgErrorGender = "select your gender";
 
 }

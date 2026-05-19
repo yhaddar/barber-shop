@@ -103,7 +103,7 @@ class RegisterView extends StatelessWidget {
                                 SizedBox(
                                   width: MediaQuery.of(context).size.width,
                                   height: 50,
-                                  child: Buttons.btnPrimary(Texts.signIn, () => auth.register(context), loading: auth.loading),
+                                  child: Buttons.btnPrimary(Texts.signIn, () => auth.goToFillProfile(), loading: auth.loading),
                                 ),
                               ],
                             ),

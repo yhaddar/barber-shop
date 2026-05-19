@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:berber_app/model/register_model.dart';
 import 'package:berber_app/utils/alert.dart';
 import 'package:berber_app/utils/routes.dart';
+import 'package:berber_app/utils/texts.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
@@ -25,9 +26,7 @@ class AuthenticationViewModel with ChangeNotifier {
     notifyListeners();
     try {
       if (formStateLogin.currentState!.validate()) {
-        final url = Uri.parse(
-          "${dotenv.env['API_HOST']}/${API.loginAPI}",
-        );
+        final url = Uri.parse("${dotenv.env['API_HOST']}/${API.loginAPI}");
         final response = await http.post(
           url,
           headers: {
@@ -42,12 +41,24 @@ class AuthenticationViewModel with ChangeNotifier {
 
         final body = jsonDecode(response.body);
 
-        if(body['success'] == false){
+        if (body['success'] == false) {
           Alert.scaffoldMessenger(context, false, body['message']);
-        }else {
+        } else {
           print("welcome back");
         }
+      }
+    } finally {
+      loading = false;
+      notifyListeners();
+    }
+  }
 
+  Future<void> goToFillProfile() async {
+    loading = true;
+    notifyListeners();
+    try {
+      if (formStateRegister.currentState!.validate()) {
+        Routes.pushNamed(Routes.fillProfile);
       }
     } finally {
       loading = false;
@@ -59,12 +70,41 @@ class AuthenticationViewModel with ChangeNotifier {
     loading = true;
     notifyListeners();
     try {
+      if (formStateFillProfile.currentState!.validate()) {
+        if ((DateTime.now().year - registerModel.dateBirthController.year) <
+            18) {
+          Alert.scaffoldMessenger(context, false, Texts.msgErrorDateBirth);
+        } else if (registerModel.phoneController.isEmpty) {
+          Alert.scaffoldMessenger(context, false, Texts.msgErrorPhone);
+        } else if (registerModel.genderController.isEmpty) {
+          Alert.scaffoldMessenger(context, false, Texts.msgErrorGender);
+        } else {
+          final url = Uri.parse("${dotenv.env['API_HOST']}/${API.registerPI}");
+          final response = await http.post(
+            url,
+            headers: {
+              "Content-Type": "application/json",
+              "Accept": "application/json",
+            },
+            body: jsonEncode({
+              "first_name": registerModel.firstNameController.text,
+              "last_name": registerModel.lastNameController.text,
+              "email": registerModel.emailController.text,
+              "password": registerModel.passwordController.text,
+              "password_confirmation":
+                  registerModel.confirmPasswordController.text,
+              "gender": registerModel.genderController,
+              "phone": registerModel.phoneController,
+              "date_birth":
+                  "${registerModel.dateBirthController.day}-${registerModel.dateBirthController.month}-${registerModel.dateBirthController.year}",
+            }),
+          );
 
-      if(formStateRegister.currentState!.validate()){
-        Routes.pushNamed(Routes.fillProfile);
+          final body = jsonDecode(response.body);
+          print(response.statusCode);
+        }
       }
-
-    }finally {
+    } finally {
       loading = false;
       notifyListeners();
     }
@@ -80,5 +120,4 @@ class AuthenticationViewModel with ChangeNotifier {
     registerModel.passwordController.clear();
     registerModel.confirmPasswordController.clear();
   }
-
 }

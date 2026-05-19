@@ -78,8 +78,6 @@ class _FillProfileViewState extends State<FillProfileView> {
                                 method: (v) {
                                   if (v!.isEmpty) {
                                     return "Required Fields";
-                                  } else if (!v.contains("@")) {
-                                    return "Email Invalid";
                                   }
                                 },
                               ),
@@ -91,8 +89,6 @@ class _FillProfileViewState extends State<FillProfileView> {
                                 method: (v) {
                                   if (v!.isEmpty) {
                                     return "Required Fields";
-                                  } else if (!v.contains("@")) {
-                                    return "Email Invalid";
                                   }
                                 },
                               ),
