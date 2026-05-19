@@ -1,5 +1,6 @@
 import 'package:berber_app/utils/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_rx/src/rx_typedefs/rx_typedefs.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
 
@@ -10,6 +11,7 @@ class FormWidget extends StatefulWidget {
   final String hint;
   final IconData? prefixIcon;
   final IconData? suffixIcon;
+  final Function(String?)? method;
 
   const FormWidget({
     super.key,
@@ -19,6 +21,7 @@ class FormWidget extends StatefulWidget {
     required this.hint,
     this.prefixIcon,
     this.suffixIcon,
+    this.method,
   });
 
   @override
@@ -37,7 +40,7 @@ class _FormWidgetState extends State<FormWidget> {
       controller: widget.textEditingController,
       keyboardType: widget.textInputType,
       maxLines: 1,
-      obscureText:  widget.isPassword ? !_isVisible : false,
+      obscureText: widget.isPassword ? !_isVisible : false,
       decoration: InputDecoration(
         filled: false,
         enabledBorder: OutlineInputBorder(
@@ -47,7 +50,10 @@ class _FormWidgetState extends State<FormWidget> {
           borderSide: BorderSide(color: CColors.overlayColor, width: 2),
         ),
         errorBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: CColors.dangerColor),
+          borderSide: BorderSide(color: CColors.dangerColor, width: 2),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: CColors.overlayColor, width: 2),
         ),
         hint: Text(
           widget.hint,
@@ -66,6 +72,12 @@ class _FormWidgetState extends State<FormWidget> {
                   : Icon(widget.suffixIcon))
             : null,
       ),
+      validator: (v) {
+        if (widget.method != null) {
+          return widget.method!(v);
+        }
+        return null;
+      },
     );
   }
 }

@@ -1,8 +1,6 @@
-import 'dart:io';
 
 import 'package:berber_app/utils/routes.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import '../model/login_model.dart';
 
@@ -10,6 +8,7 @@ class AuthenticationViewModel with ChangeNotifier {
 
   static void goTo(String route) => Routes.pushNamed(route);
   bool loading = false;
+  final GlobalKey<FormState> formState = .new();
 
   LoginModel loginController = LoginModel();
 
@@ -18,6 +17,10 @@ class AuthenticationViewModel with ChangeNotifier {
     loading = true;
     notifyListeners();
     try {
+
+      if(formState.currentState!.validate()){
+        print("form validated");
+      }
 
 
     }finally {

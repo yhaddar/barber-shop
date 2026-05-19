@@ -1,7 +1,7 @@
 import 'package:berber_app/utils/images.dart';
+import 'package:berber_app/utils/methods.dart';
 import 'package:berber_app/widgets/buttons.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:provider/provider.dart';
@@ -49,6 +49,7 @@ class LoginView extends StatelessWidget {
                       spacing: 20,
                       children: [
                         Form(
+                          key: auth.formState,
                           child: Column(
                             spacing: 8,
                             children: [
@@ -57,6 +58,13 @@ class LoginView extends StatelessWidget {
                                 textInputType: TextInputType.emailAddress,
                                 hint: Texts.emailHint,
                                 prefixIcon: Icons.email_outlined,
+                                method: (v){
+                                  if(v!.isEmpty){
+                                    return "Required Fields";
+                                  }else if(!v.contains("@")){
+                                    return "Email Invalid";
+                                  }
+                                },
                               ),
                               FormWidget(
                                 textEditingController: auth.loginController.passwordController,
@@ -65,6 +73,13 @@ class LoginView extends StatelessWidget {
                                 prefixIcon: Iconsax.key,
                                 suffixIcon: Iconsax.eye,
                                 isPassword: true,
+                                method: (v){
+                                  if(v!.isEmpty){
+                                    return "Required Fields";
+                                  }else if(Methods.between(v, 8)){
+                                    return "Password is too short";
+                                  }
+                                },
                               ),
                               SizedBox(
                                 width: MediaQuery.of(context).size.width,
