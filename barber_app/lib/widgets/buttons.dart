@@ -4,7 +4,11 @@ import 'package:google_fonts/google_fonts.dart';
 import '../utils/colors.dart';
 
 class Buttons {
-  static ElevatedButton btnPrimary(String title, method) {
+  static ElevatedButton btnPrimary(
+    String title,
+    method, {
+    bool loading = false,
+  }) {
     return ElevatedButton(
       onPressed: method,
       style: ButtonStyle(
@@ -21,14 +25,25 @@ class Buttons {
           (states) => Size(double.infinity, 100),
         ),
       ),
-      child: Text(
-        title,
-        style: GoogleFonts.nunito(
-          color: CColors.textColorSecondary,
-          fontWeight: FontWeight.bold,
-          fontSize: 16,
-        ),
-      ),
+      child: loading
+          ? SizedBox(
+              width: 22,
+              height: 22,
+              child: CircularProgressIndicator(
+                strokeWidth: 2,
+                valueColor: AlwaysStoppedAnimation<Color>(
+                  CColors.textColorSecondary,
+                ),
+              ),
+            )
+          : Text(
+              title,
+              style: GoogleFonts.nunito(
+                color: CColors.textColorSecondary,
+                fontWeight: FontWeight.bold,
+                fontSize: 16,
+              ),
+            ),
     );
   }
 
@@ -64,14 +79,16 @@ class Buttons {
               ),
             ),
           ),
-          Text(
-            title,
-            style: GoogleFonts.nunito(
-              color: CColors.textColorPrimary,
-              fontWeight: FontWeight.bold,
-              fontSize: 16,
-            ),
-          ),
+          ?title != ""
+              ? Text(
+                  title,
+                  style: GoogleFonts.nunito(
+                    color: CColors.textColorPrimary,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                  ),
+                )
+              : null,
         ],
       ),
     );
@@ -88,7 +105,7 @@ class Buttons {
           fontWeight: FontWeight.bold,
           fontSize: 15,
         ),
-        overlayColor: Colors.transparent
+        overlayColor: Colors.transparent,
       ),
       onPressed: method,
       child: Text(title),

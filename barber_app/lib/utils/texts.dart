@@ -8,4 +8,10 @@ class Texts {
   static String signInWithPassword = "Sign in with password";
   static String dontHaveAnAccount = "don't have an account ? ";
   static String signUp = "Sign up";
+  static String titleRegisterPage = "Create Your Account";
+  static String titleLoginPage = "Login to your Account";
+  static String emailHint = "Enter your Email";
+  static String passwordHint = "Enter your Password";
+  static String passwordConfirmedHint = "Confirmed your Password";
+  static String orContinueWith = "or continue with";
 }
