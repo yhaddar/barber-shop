@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:berber_app/model/register_model.dart';
 import 'package:berber_app/utils/alert.dart';
 import 'package:berber_app/utils/routes.dart';
 import 'package:flutter/widgets.dart';
@@ -12,15 +13,17 @@ import '../utils/api.dart';
 class AuthenticationViewModel with ChangeNotifier {
   static void goTo(String route) => Routes.pushNamed(route);
   bool loading = false;
-  final GlobalKey<FormState> formState = .new();
+  final GlobalKey<FormState> formStateLogin = .new();
+  final GlobalKey<FormState> formStateRegister = .new();
 
   LoginModel loginController = LoginModel();
+  RegisterModel registerModel = RegisterModel();
 
   Future<void> login(context) async {
     loading = true;
     notifyListeners();
     try {
-      if (formState.currentState!.validate()) {
+      if (formStateLogin.currentState!.validate()) {
         final url = Uri.parse(
           "${dotenv.env['API_HOST']}/${API.loginAPI}",
         );
@@ -50,4 +53,25 @@ class AuthenticationViewModel with ChangeNotifier {
       notifyListeners();
     }
   }
+
+  Future<void> register(context) async {
+    loading = true;
+    notifyListeners();
+    try {
+
+      if(formStateRegister.currentState!.validate()){
+        print("");
+      }
+
+    }finally {
+      loading = false;
+      notifyListeners();
+    }
+  }
+
+  Future<void> killControllers() async {
+    loginController.emailController.clear();
+    loginController.passwordController.clear();
+  }
+
 }

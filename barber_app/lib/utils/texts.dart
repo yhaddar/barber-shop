@@ -7,7 +7,9 @@ class Texts {
   static List<String> onboardingText = ["Find Barbers and Salons Easily in Your Hands", "Book your Favorite Barber and Salon Quickly", "Come be handsome and beautiful with us right now!"];
   static String signInWithPassword = "Sign in with password";
   static String dontHaveAnAccount = "don't have an account ? ";
+  static String haveAnAccount = "Already have an account ? ";
   static String signUp = "Sign up";
+  static String signIn = "Sign in";
   static String titleRegisterPage = "Create Your Account";
   static String titleLoginPage = "Login to your Account";
   static String emailHint = "Enter your Email";
