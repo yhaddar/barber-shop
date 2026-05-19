@@ -22,19 +22,32 @@ class UserController extends Controller
     public function login(LoginRequest $request){
 
         $data = $request->validated();
-        if(Auth::attempt(['email' => $data['email'], 'password' => $data['password']])){
-            $account_verified = Auth::user();
 
-            if($account_verified == null){
-                return response()->json([
-                    "message" => "verifier your account"
-                ]);
+        if(User::where('email', $data['email'])->exists()){
+            if(Auth::attempt(['email' => $data['email'], 'password' => $data['password']])){
+                $account_verified = Auth::user();
+
+                if($account_verified == null){
+                    return response()->json([
+                        "success" => false,
+                        "message" => "verifier your account"
+                    ]);
+                }else {
+                    return response()->json([
+                        "success" => true,
+                        "message" => $account_verified->createToken("token", [], Carbon::now()->addDays(3))->plainTextToken
+                    ]);
+                }
+
             }else {
-                return $account_verified->createToken("token", [], Carbon::now()->addDays(3))->plainTextToken;
+                return response()->json([
+                    "success" => false,
+                    "message" => "Password incorrect"
+                ]);
             }
-
         }else {
             return response()->json([
+                "success" => false,
                 "message" => "User not found"
             ]);
         }

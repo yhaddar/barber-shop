@@ -38,7 +38,12 @@ class AuthenticationViewModel with ChangeNotifier {
 
         final body = jsonDecode(response.body);
 
-        Alert.scaffoldMessenger(context, false, "");
+        if(body['success'] == false){
+          Alert.scaffoldMessenger(context, false, body['message']);
+        }else {
+          print("welcome back");
+        }
+
       }
     } finally {
       loading = false;

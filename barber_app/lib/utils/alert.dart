@@ -9,7 +9,7 @@ class Alert {
     return ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         behavior: SnackBarBehavior.fixed,
-        backgroundColor: isSuccess ? CColors.successColor :  CColors.dangerColor,
+        backgroundColor: isSuccess ? CColors.successColor :  CColors.dangerColor.withValues(alpha: 0.9),
         content: Row(children: [Text(message, style: GoogleFonts.openSans(
           color: CColors.textColorSecondary,
           fontWeight: FontWeight.w600
