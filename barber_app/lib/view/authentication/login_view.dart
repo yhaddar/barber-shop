@@ -1,6 +1,7 @@
 import 'package:berber_app/utils/images.dart';
 import 'package:berber_app/widgets/buttons.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:provider/provider.dart';

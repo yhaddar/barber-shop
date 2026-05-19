@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:berber_app/utils/routes.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import '../model/login_model.dart';
 
@@ -10,11 +13,13 @@ class AuthenticationViewModel with ChangeNotifier {
 
   LoginModel loginController = LoginModel();
 
+
   Future<void> login() async {
     loading = true;
     notifyListeners();
     try {
-      print(loginController.passwordController.text);
+
+
     }finally {
       loading = false;
       notifyListeners();
