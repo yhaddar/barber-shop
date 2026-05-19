@@ -5,5 +5,7 @@ class Images {
   static String facebookIcon = "assets/images/icons/facebook.png";
   static String googleIcon = "assets/images/icons/google.png";
   static String appleIcon = "assets/images/icons/apple.png";
+  static String boyProfile = "assets/images/profile/boy.png";
+  static String womenProfile = "assets/images/profile/woman.png";
 
 }

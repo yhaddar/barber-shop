@@ -20,7 +20,7 @@ class LoginView extends StatelessWidget {
     return PopScope(
       canPop: true,
       onPopInvokedWithResult: (bool didPop, String? result){
-        context.read<AuthenticationViewModel>().killControllers();
+        context.read<AuthenticationViewModel>().killLoginControllers();
       },
       child: Scaffold(
         appBar: AppBar(),

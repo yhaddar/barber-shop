@@ -15,6 +15,7 @@ class AuthenticationViewModel with ChangeNotifier {
   bool loading = false;
   final GlobalKey<FormState> formStateLogin = .new();
   final GlobalKey<FormState> formStateRegister = .new();
+  final GlobalKey<FormState> formStateFillProfile = .new();
 
   LoginModel loginController = LoginModel();
   RegisterModel registerModel = RegisterModel();
@@ -60,7 +61,7 @@ class AuthenticationViewModel with ChangeNotifier {
     try {
 
       if(formStateRegister.currentState!.validate()){
-        print("");
+        Routes.pushNamed(Routes.fillProfile);
       }
 
     }finally {
@@ -69,9 +70,15 @@ class AuthenticationViewModel with ChangeNotifier {
     }
   }
 
-  Future<void> killControllers() async {
+  Future<void> killLoginControllers() async {
     loginController.emailController.clear();
     loginController.passwordController.clear();
+  }
+
+  Future<void> killRegisterControllers() async {
+    registerModel.emailController.clear();
+    registerModel.passwordController.clear();
+    registerModel.confirmPasswordController.clear();
   }
 
 }

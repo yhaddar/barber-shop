@@ -7,7 +7,7 @@ class RegisterModel {
   final TextEditingController firstNameController = .new();
   final TextEditingController middleNameController = .new();
   final TextEditingController lastNameController = .new();
-  final TextEditingController phoneController = .new();
-  final TextEditingController dateBirthController = .new();
-  final TextEditingController genderController = .new();
+  late String phoneController = "";
+  late DateTime dateBirthController = DateTime.now();
+  late String genderController = "M";
 }

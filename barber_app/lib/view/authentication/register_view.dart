@@ -20,7 +20,7 @@ class RegisterView extends StatelessWidget {
     return PopScope(
       canPop: true,
       onPopInvokedWithResult: (bool didPop, String? result){
-        context.read<AuthenticationViewModel>().killControllers();
+        context.read<AuthenticationViewModel>().killRegisterControllers();
       },
       child: Scaffold(
         appBar: AppBar(),

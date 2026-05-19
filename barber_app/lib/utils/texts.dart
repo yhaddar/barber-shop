@@ -12,8 +12,13 @@ class Texts {
   static String signIn = "Sign in";
   static String titleRegisterPage = "Create Your Account";
   static String titleLoginPage = "Login to your Account";
+  static String fillProfilePage = "Fill Your profile";
   static String emailHint = "Enter your Email";
   static String passwordHint = "Enter your Password";
   static String passwordConfirmedHint = "Confirmed your Password";
   static String orContinueWith = "or continue with";
+  static String firstNameHint = "First Name";
+  static String lastNameHint = "Last Name";
+  static String continueText = "continue";
+
 }

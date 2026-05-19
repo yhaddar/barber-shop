@@ -42,6 +42,8 @@ dependencies:
   iconsax: ^0.0.8
   flutter_dotenv:
   http: ^1.6.0
+  time_picker_spinner_pop_up: ^3.0.0
+  intl_phone_field: ^3.2.0
 
 dev_dependencies:
   flutter_test:
@@ -73,6 +75,7 @@ flutter:
     - assets/images/authentication/
     - assets/images/icons/
     - .env
+    - assets/images/profile/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
