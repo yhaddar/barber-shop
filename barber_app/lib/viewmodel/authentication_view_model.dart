@@ -96,12 +96,16 @@ class AuthenticationViewModel with ChangeNotifier {
               "gender": registerModel.genderController,
               "phone": registerModel.phoneController,
               "date_birth":
-                  "${registerModel.dateBirthController.day}-${registerModel.dateBirthController.month}-${registerModel.dateBirthController.year}",
+                  "${registerModel.dateBirthController.day.toString().padLeft(2, '0')}-${registerModel.dateBirthController.month.toString().padLeft(2, '0')}-${registerModel.dateBirthController.year}",
             }),
           );
 
           final body = jsonDecode(response.body);
-          print(response.statusCode);
+          if(response.statusCode == 422){
+            Alert.scaffoldMessenger(context, false, body['message']);
+          }else if(body['status'] == true){
+            print('hello');
+          }
         }
       }
     } finally {
