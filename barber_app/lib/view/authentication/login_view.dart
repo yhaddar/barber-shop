@@ -84,7 +84,7 @@ class LoginView extends StatelessWidget {
                               SizedBox(
                                 width: MediaQuery.of(context).size.width,
                                 height: 50,
-                                child: Buttons.btnPrimary(Texts.signUp, () => auth.login(), loading: auth.loading),
+                                child: Buttons.btnPrimary(Texts.signUp, () => auth.login(context), loading: auth.loading),
                               ),
                             ],
                           ),

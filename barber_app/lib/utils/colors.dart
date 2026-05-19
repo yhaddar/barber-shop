@@ -7,4 +7,6 @@ class CColors {
   static Color colorBrand = Color(0XFFFF6B35);
   static Color overlayColor = Colors.deepOrange;
   static Color dangerColor = Color(0XFFFF0000);
+
+  static Color successColor = Color(0XFF306D29);
 }

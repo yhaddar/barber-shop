@@ -1,6 +1,5 @@
 import 'package:berber_app/utils/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_rx/src/rx_typedefs/rx_typedefs.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
 
