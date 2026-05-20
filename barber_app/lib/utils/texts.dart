@@ -23,5 +23,7 @@ class Texts {
   static String msgErrorDateBirth = "you must be great than 18";
   static String msgErrorPhone = "select number phone";
   static String msgErrorGender = "select your gender";
+  static String sendCodeTitle = "Active Your Account";
+  static String sendCodeDescription = "your code was send to : ";
 
 }

@@ -94,13 +94,15 @@ class UserController extends Controller
             if($expires_date->diffInSeconds(Carbon::now()) >= 59){
                 $code->delete();
                 return response()->json([
-                   "message" => "code expired"
+                    "success" => false,
+                    "message" => "code expired"
                 ]);
             }else {
                 $user['is_verified'] = true;
                 if($user->save()){
                     $code->delete();
                     return response()->json([
+                        "success" => true,
                         "message" => "your account is verified"
                     ]);
                 }
@@ -108,6 +110,7 @@ class UserController extends Controller
 
         }else {
             return response()->json([
+                "success" => false,
                 "message" => "Code Verification was incorrect"
             ]);
         }
@@ -127,11 +130,13 @@ class UserController extends Controller
             $otp->delete();
             $this->otpCodeResend("your berber shop code is : ", $user);
             return response()->json([
+                "success" => true,
                 "message" => "code resend"
             ]);
         }else {
             $this->otpCodeResend("your berber shop code is : ", $user);
             return response()->json([
+                "success" => true,
                 "message" => "code resend"
             ]);
         }
@@ -148,6 +153,7 @@ class UserController extends Controller
         Mail::to($user['email'])->send(new VerificationMailer($message, $code));
         if($otpVerification->save()){
             return response()->json([
+                "success" => true,
                 "message" => "your code was send"
             ]);
         }

@@ -10,7 +10,7 @@ import '../../utils/routes.dart';
 import '../../utils/texts.dart';
 import '../../viewmodel/authentication_view_model.dart';
 import '../../widgets/buttons.dart';
-import '../../widgets/form.dart';
+import '../../widgets/forms/form_widget.dart';
 
 class RegisterView extends StatelessWidget {
   const RegisterView({super.key});

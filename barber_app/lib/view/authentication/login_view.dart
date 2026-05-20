@@ -10,7 +10,7 @@ import '../../utils/colors.dart';
 import '../../utils/routes.dart';
 import '../../utils/texts.dart';
 import '../../viewmodel/authentication_view_model.dart';
-import '../../widgets/form.dart';
+import '../../widgets/forms/form_widget.dart';
 
 class LoginView extends StatelessWidget {
   const LoginView({super.key});

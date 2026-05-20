@@ -3,11 +3,13 @@ import 'dart:convert';
 import 'package:berber_app/model/register_model.dart';
 import 'package:berber_app/utils/alert.dart';
 import 'package:berber_app/utils/routes.dart';
+import 'package:berber_app/utils/storage.dart';
 import 'package:berber_app/utils/texts.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 
+import '../model/code_model.dart';
 import '../model/login_model.dart';
 import '../utils/api.dart';
 
@@ -17,9 +19,15 @@ class AuthenticationViewModel with ChangeNotifier {
   final GlobalKey<FormState> formStateLogin = .new();
   final GlobalKey<FormState> formStateRegister = .new();
   final GlobalKey<FormState> formStateFillProfile = .new();
+  final GlobalKey<FormState> formStateCodeActive = .new();
+  late Map<String, dynamic> errors = {
+    "success": false,
+    "message": ""
+  };
 
   LoginModel loginController = LoginModel();
   RegisterModel registerModel = RegisterModel();
+  CodeModel codeModel = CodeModel();
 
   Future<void> login(context) async {
     loading = true;
@@ -44,7 +52,8 @@ class AuthenticationViewModel with ChangeNotifier {
         if (body['success'] == false) {
           Alert.scaffoldMessenger(context, false, body['message']);
         } else {
-          print("welcome back");
+          Routes.pushToNextPage(Routes.home);
+          Storage.store("token", body['message']);
         }
       }
     } finally {
@@ -102,13 +111,55 @@ class AuthenticationViewModel with ChangeNotifier {
 
           final body = jsonDecode(response.body);
           if(response.statusCode == 422){
-            Alert.scaffoldMessenger(context, false, body['message']);
-          }else if(body['status'] == true){
-            print('hello');
+            Alert.scaffoldMessenger(context, false, body['message'].toString().split("(")[0]);
+          }else if(body['success'] == true){
+            Routes.pushNamed(Routes.activeAccount);
+            Storage.store('email', registerModel.emailController.text);
           }
         }
       }
     } finally {
+      loading = false;
+      notifyListeners();
+    }
+  }
+
+  Future<void> activeAccount() async {
+    loading = true;
+    notifyListeners();
+
+    try {
+
+      if(formStateCodeActive.currentState!.validate()){
+        
+        final email = await Storage.index("email");
+        final url = Uri.parse("${dotenv.env['API_HOST']}/${API.verifyAccountAPI}?email=$email");
+        final response = await http.post(url,
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+          },
+          body: jsonEncode({
+            "code": "${codeModel.code1.text}${codeModel.code2.text}${codeModel.code3.text}${codeModel.code4.text}"
+          })
+        );
+        final body = jsonDecode(response.body);
+        if(body['success'] != null && body['success'] == false){
+          errors = {
+            "success": body['success'],
+            "message": body['message']
+          };
+          notifyListeners();
+        }else if(body['success'] == true){
+          errors = {};
+          notifyListeners();
+
+          Routes.pushToNextPage(Routes.home);
+        }
+
+      }
+
+    }finally {
       loading = false;
       notifyListeners();
     }

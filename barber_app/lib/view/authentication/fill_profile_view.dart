@@ -10,7 +10,7 @@ import '../../utils/colors.dart';
 import '../../utils/texts.dart';
 import '../../viewmodel/authentication_view_model.dart';
 import '../../widgets/buttons.dart';
-import '../../widgets/form.dart';
+import '../../widgets/forms/form_widget.dart';
 
 class FillProfileView extends StatefulWidget {
   const FillProfileView({super.key});
@@ -97,16 +97,14 @@ class _FillProfileViewState extends State<FillProfileView> {
                                 height: 60,
                                 child: TimePickerSpinnerPopUp(
                                   mode: CupertinoDatePickerMode.date,
-                                  initTime: DateTime.now(),
+                                  initTime: auth.registerModel.dateBirthController,
                                   onChange: (v) =>
-                                      auth.registerModel.dateBirthController =
-                                          v,
+                                      setState(() => auth.registerModel.dateBirthController = v),
                                 ),
                               ),
                               SizedBox(
                                 child: IntlPhoneField(
                                   decoration: InputDecoration(
-                                    labelText: "661123474",
                                     enabledBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
                                         color: Colors.grey.shade300,
@@ -133,9 +131,8 @@ class _FillProfileViewState extends State<FillProfileView> {
                                     ),
                                   ),
                                   initialCountryCode: 'MA',
-                                  onChanged: (v) =>
-                                      auth.registerModel.phoneController =
-                                          v.completeNumber,
+                                  initialValue: auth.registerModel.phoneController,
+                                  onChanged: (v) => setState(() => auth.registerModel.phoneController = v.completeNumber),
                                 ),
                               ),
                               Container(
